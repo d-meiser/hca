@@ -1,6 +1,6 @@
 module Lib
     ( someFunc
-    , makeEmptyEnsemble
+    , emptyEnsemble
     ) where
 
 import qualified Data.Array.Repa as R
@@ -29,6 +29,6 @@ data Ensemble = Ensemble Positions Velocities Parameters
               | EmptyEnsemble
     deriving Show
 
-makeEmptyEnsemble = Empty
+emptyEnsemble = EmptyEnsemble
 
 
