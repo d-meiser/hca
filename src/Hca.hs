@@ -2,6 +2,8 @@ module Hca
     ( emptyEnsemble
     , combineEnsembles
     , numPtcls
+    , Vec3(..)
+    , generateParticles
     ) where
 
 import qualified Data.Array.Repa as R
@@ -48,4 +50,17 @@ combineEnsembles (Ensemble ph0) (Ensemble ph1) = Ensemble (PhaseSpace ph)
 
 numPtcls :: Ensemble -> Int
 numPtcls EmptyEnsemble = 0
+numPtcls (Ensemble phaseSpace) = s `quot` 6
+  where
+    s = R.size $ R.extent $ array phaseSpace
 
+data Vec3 = Vec3 !Double !Double !Double
+
+type PositionGenerator = Int -> Vec3
+type VelocityGenerator = Int -> Vec3
+
+generateParticles :: Int -> PositionGenerator -> VelocityGenerator -> Ensemble
+generateParticles n _ _ = Ensemble $ PhaseSpace { array=phaseSpaceArray }
+  where
+    phaseSpaceArray = R.fromListUnboxed (R.Z R.:. (6::Int) R.:. (n::Int)) $
+                      replicate (6 * n) 0.0
