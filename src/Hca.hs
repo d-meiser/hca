@@ -1,6 +1,7 @@
 module Hca
     ( emptyEnsemble
     , combineEnsembles
+    , numPtcls
     ) where
 
 import qualified Data.Array.Repa as R
@@ -44,4 +45,7 @@ combineEnsembles (Ensemble ph0) (Ensemble ph1) = Ensemble (PhaseSpace ph)
             | phaseSpaceArray <- [array ph0, array ph1]
             , i <- [0..(5::Int)]]
     emptyArray = R.delay $ R.fromListUnboxed (R.Z R.:. (0::Int)) []
+
+numPtcls :: Ensemble -> Int
+numPtcls EmptyEnsemble = 0
 
