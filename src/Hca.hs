@@ -1,4 +1,4 @@
-module Lib
+module Hca
     ( emptyEnsemble
     , combineEnsembles
     ) where
