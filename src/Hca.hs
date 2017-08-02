@@ -4,7 +4,10 @@ module Hca
     , numPtcls
     , Vec3(..)
     , generateParticles
+    , Bath.Bath
     ) where
+
+import qualified Bath as Bath
 
 import qualified Data.Array.Repa as R
 import qualified Data.Map.Strict as Map
@@ -64,3 +67,4 @@ generateParticles n _ _ = Ensemble $ PhaseSpace { array=phaseSpaceArray }
   where
     phaseSpaceArray = R.fromListUnboxed (R.Z R.:. (6::Int) R.:. (n::Int)) $
                       replicate (6 * n) 0.0
+
